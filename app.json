@@ -1,0 +1,36 @@
+{
+  "expo": {
+    "name": "vodas",
+    "slug": "vodas",
+    "privacy": "public",
+    "sdkVersion": "36.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "version": "1.0.0",
+   "orientation": "portrait",
+  "primaryColor": "#f8f8f8",
+  "icon": "./assets/icon.png",
+  "splash": {
+    "image": "./assets/splash2.png",
+    "resizeMode": "cover",
+    "backgroundColor": "#ffffff"
+  },
+  "androidStatusBarColor": "#f8f8f8",
+  "androidStatusBar": {
+    "barStyle": "dark-content",
+    "backgroundColor": "#f8f8f8"
+  },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    }
+  }
+}
