@@ -11,14 +11,8 @@ import Home_tab from './Home_tab'
 import Search_movie from './Search_movie'
 import Category from './Category'
 import Offline from './Offline'
-
-function More() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>More</Text>
-    </View>
-  );
-}
+import Modal from "react-native-modal";
+import More from "./More";
 
 const Tab = createBottomTabNavigator();
 

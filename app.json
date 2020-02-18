@@ -9,6 +9,9 @@
       "android",
       "web"
     ],
+    "android": {
+    "package": "com.mest.vodas"
+},
     "version": "1.0.0",
    "orientation": "portrait",
   "primaryColor": "#f8f8f8",

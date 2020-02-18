@@ -31,7 +31,7 @@ export default class Search_movie extends Component {
                             style={{ fontSize: 16, margin: 5, padding: 5,flex:1, height: 50, color: 'white'}}
                        
                         />
-                       <Text style={{lineHeight:50,fontSize:24,color:'gray',paddingHorizontal:10}}>X</Text>
+                       <Text style={{lineHeight:50,fontSize:24,color:'gray',paddingHorizontal:10}}>x</Text>
                     </View>
  
                 <View style={{ flex: 1, alignItems: 'flex-start', padding: 20, backgroundColor:'#242424',margin:5}}>

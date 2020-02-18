@@ -6,6 +6,7 @@ import {
 import { View, Text, Dimensions, Image, ScrollView, TouchableOpacity, TouchableHighlight } from 'react-native';
 const { width } = Dimensions.get('window');
 import { Video } from 'expo-av';
+import { ScreenOrientation } from 'expo';
 export default class Movie_display extends Component {
 
     static navigationOptions =
@@ -15,21 +16,25 @@ export default class Movie_display extends Component {
 constructor (props) {
     super(props)
     this.state={play:false}
+     this.videoRef  = React.createRef();
 }
     playVideo = () => {
         this.setState({ play: !this.state.play });
     };
+     changeScreenOrientation=async ()=>{
+  await ScreenOrientation.allowAsync(ScreenOrientation.Orientation.LANDSCAPE);
+}
     render() {
 
         return (
 
             <View style={{ flex: 1, backgroundColor: '#0F161E' }}>
             <ScrollView>
-                <View style={{ width: '100%', backgroundColor: 'black' }}>
+                {/* <View style={{ width: '100%', backgroundColor: 'black' }}>
                         {!this.state.play &&
                         <TouchableOpacity onPress={this.playVideo}  style={{width:width, height: width*0.6,position:'absolute',zIndex:3,justifyContent:'center',alignItems:'center' }}><Image source={require('../assets/play.png')} style={{ width: width * 0.25, height: width * 0.25}} /></TouchableOpacity>
                         }
-                        <TouchableHighlight onPress={this.playVideo}>
+                        <TouchableHighlight onPress={this.playVideo}> */}
                 <Video
 
                         source={{ uri: 'http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4' }}
@@ -37,12 +42,30 @@ constructor (props) {
                         volume={1.0}
                         isMuted={false}
                         resizeMode="cover"
+                          ref={(video) => this.videoRef = video}
                             shouldPlay={this.state.play}
                         isLooping
+                        useNativeControls={true}
                         style={{ width: width, height: width*0.6 }}
-                /></TouchableHighlight>
-                        
-                </View>
+                />
+                {/* </TouchableHighlight> */}
+                     {/* <View style={{width:'100%',height:40,backgroundColor:'white',display:'flex', flexDirection: 'row',alignItems:'center',justifyContent:'flex-start',paddingHorizontal:10}}>
+                            <TouchableOpacity onPress={() => {
+  this.videoRef.playAsync()
+}} style={{width:'10%'}}>
+                              <Ionicons name="md-play"  style={{ fontSize: 28, color: 'black' }} />
+                             </TouchableOpacity>
+                              <View style={{height:5,width:'75%',backgroundColor:'#e5e5e5'}}></View>
+                         
+ <TouchableOpacity onPress={() => {
+     this.videoRef.presentFullscreenPlayer()
+      this.changeScreenOrientation()
+}}  style={{width:'10%',marginLeft:10,paddingLeft:5}}>
+                              <Ionicons name="md-qr-scanner"  style={{ fontSize: 28, color: 'black' }} />
+                             </TouchableOpacity>
+                              
+                     </View>    */}
+                {/* </View> */}
 
                    
                 <View style={{display: 'flex', width: '100%', flexDirection: 'row'}}>

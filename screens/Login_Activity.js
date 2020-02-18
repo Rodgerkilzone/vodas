@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
 import BottomTabs from './BottomTabs';
-import 'react-native-gesture-handler';
+// import 'react-native-gesture-handler';
 import { Text, ScrollView, Alert, Dimensions, ActivityIndicator, KeyboardAvoidingView, AsyncStorage, StatusBar, View, Image, Button, TextInput, TouchableOpacity, TouchableHighlight, StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-
-const Stack = createStackNavigator();
+// import { enableScreens } from 'react-native-screens';
+// const Stack = createStackNavigator();
 var width = Dimensions.get('window').width;
 var height = Dimensions.get('window').height;
 
  class Login_Activity extends Component {
 
 
-  constructor(props) {
-    super(props);
+  constructor(props,navigation) {
+    super(props,navigation);
     this.state = {
       email: '',
     
@@ -30,11 +30,9 @@ var height = Dimensions.get('window').height;
 
       alert('Please enter the email and password')
     }else{
+     this.props.navigation.navigate('BottomTabs')
      
-     
-      navigation.navigate('BottomTabs')
-    
-    
+   
     }
   }
 
@@ -48,8 +46,10 @@ var height = Dimensions.get('window').height;
   render() {
     return (
       <View style={styles.MainContainer}><StatusBar hidden={true} />
-     
-        <KeyboardAvoidingView style={{ flex: 1, alignItems: 'center', justifyContent: 'center', position: 'absolute', bottom: 110 }}
+     <StatusBar   
+       barStyle = "dark-content" 
+       hidden={false} />  
+        <KeyboardAvoidingView style={{ }}
           behavior="padding" enabled >
           <View style={{ width: '100%', alignItems: 'center' }}>
           
@@ -69,11 +69,11 @@ var height = Dimensions.get('window').height;
               placeholder="Email"
               keyboardType="email-address"
               returnKeyType="next"
-              onSubmitEditing={(event) => { this.refs.first_name.focus(); }}
+              onSubmitEditing={(event) => { this.refs.password.focus(); }}
               placeholderTextColor="white"
               autoCapitalize="none"
               style={{ backgroundColor: 'rgba(255,255,255,0.5)', color: 'white', margin: 5, fontSize: 16, padding: 5, width: width * 90 / 100, height: 50, borderRadius: 5 }}
-
+              selectionColor='white'
               onChangeText={(text) => this.setState({ email: text })}
               value={this.state.email}
 
@@ -81,7 +81,7 @@ var height = Dimensions.get('window').height;
 
 
             <TextInput style={styles.input}
-          
+            selectionColor='white'
               placeholder="Password"
               ref="password"
               secureTextEntry={true}
@@ -104,7 +104,7 @@ var height = Dimensions.get('window').height;
             color="rgba(0,0,0,0.0)"
           /></TouchableHighlight>
         </KeyboardAvoidingView>
-        <View style={{ position: 'absolute', bottom: 10 }}>
+        <View style={{marginTop:20}}>
         
           <TouchableOpacity
             style={{
@@ -134,7 +134,45 @@ var height = Dimensions.get('window').height;
   }
 }
 
-export default Login_Activity
+
+const Stack = createStackNavigator();
+
+function MyStack() {
+  return (
+    <Stack.Navigator
+      initialRouteName="Home"
+      screenOptions={{
+        headerShown: false,
+        // headerTintColor: 'white',
+        // headerStyle: { backgroundColor: 'tomato' },
+      }}
+    >
+      <Stack.Screen
+        name="Login_Activity"
+        component={Login_Activity}
+        options={{
+          title: 'Awesome app',
+        }}
+      />
+      <Stack.Screen
+        name="BottomTabs"
+        component={BottomTabs}
+        options={{
+          title: 'My profile',
+        }}
+      />
+    
+    </Stack.Navigator>
+  );
+}
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <MyStack />
+    </NavigationContainer>
+  );
+}
 
 const styles = StyleSheet.create({
 
