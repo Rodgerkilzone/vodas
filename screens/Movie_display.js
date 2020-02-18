@@ -3,16 +3,13 @@ import {
     Ionicons,
     MaterialIcons
 } from '@expo/vector-icons';
-import { View, Text, Dimensions, Image, ScrollView, TouchableOpacity, TouchableHighlight } from 'react-native';
+import { View, Text, Dimensions, StatusBar, Image, ScrollView, TouchableOpacity, TouchableHighlight } from 'react-native';
 const { width } = Dimensions.get('window');
 import { Video } from 'expo-av';
 import { ScreenOrientation } from 'expo';
 export default class Movie_display extends Component {
 
-    static navigationOptions =
-        {
-            title: 'Details Activity',
-        };
+ 
 constructor (props) {
     super(props)
     this.state={play:false}
@@ -29,6 +26,7 @@ constructor (props) {
         return (
 
             <View style={{ flex: 1, backgroundColor: '#0F161E' }}>
+              
             <ScrollView>
                 {/* <View style={{ width: '100%', backgroundColor: 'black' }}>
                         {!this.state.play &&

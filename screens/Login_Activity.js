@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import BottomTabs from './BottomTabs';
+import Register_Activity from './Register_Activity';
 // import 'react-native-gesture-handler';
 import { Text, ScrollView, Alert, Dimensions, ActivityIndicator, KeyboardAvoidingView, AsyncStorage, StatusBar, View, Image, Button, TextInput, TouchableOpacity, TouchableHighlight, StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
@@ -8,7 +9,11 @@ import { createStackNavigator } from '@react-navigation/stack';
 // const Stack = createStackNavigator();
 var width = Dimensions.get('window').width;
 var height = Dimensions.get('window').height;
+import {
+  createAppContainer,
 
+  createSwitchNavigator,
+} from 'react-navigation'
  class Login_Activity extends Component {
 
 
@@ -25,13 +30,18 @@ var height = Dimensions.get('window').height;
     }
   }
   getMobileSession() {
- 
+    var email = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+
     if (typeof this.state.email == "undefined" || typeof this.state.password=="undefined" ){
 
       alert('Please enter the email and password')
     }else{
+      if (this.state.email.match(email)) {
+        //BACKEND CONNECTION LOGIC
      this.props.navigation.navigate('BottomTabs')
-     
+      }else{
+        alert("Please enter a valid Email Address");
+      }
    
     }
   }
@@ -52,20 +62,10 @@ var height = Dimensions.get('window').height;
         <KeyboardAvoidingView style={{ }}
           behavior="padding" enabled >
           <View style={{ width: '100%', alignItems: 'center' }}>
-          
-            <TouchableOpacity
-              style={{
-                padding: 3, width: width * 90 / 100, height: 50, borderRadius: 5, alignItems: 'center',backgroundColor:'white',display:'flex',flexDirection:'row',justifyContent:'space-between'
-              }}>
-              <View style={{ width:'50%'}}>
-                     <Image source={require('../assets/g_logo.png')} style={{ width: 30, height: 30,marginLeft:10 }} />
-                </View>
-           
-              <Text style={{ color: 'gray', fontSize: 16,width:'50%'}}>Sign In</Text>
-            </TouchableOpacity>
-            <Text style={{ color: 'white', fontSize: 18 }}>OR</Text>
+            <Text style={{ color: 'white', fontSize: 24, fontWeight: 'bold' }}>VODAS</Text>
+            <Text style={{ color: 'white', fontSize: 18 }}>SIGN IN</Text>
             <TextInput style={styles.input}
-              //  underlineColorAndroid = "transparent"
+            
               placeholder="Email"
               keyboardType="email-address"
               returnKeyType="next"
@@ -103,6 +103,16 @@ var height = Dimensions.get('window').height;
             title="Sign In"
             color="rgba(0,0,0,0.0)"
           /></TouchableHighlight>
+          <TouchableHighlight
+            style={{
+              padding: 3, width: width * 90 / 100,marginTop:20, height: 50, borderRadius: 5, borderColor: 'white', borderWidth: 2
+            }}><Button
+
+              onPress={()=>{this.props.navigation.navigate('Register_Activity')}}
+
+              title="Register"
+              color="rgba(0,0,0,0.0)"
+            /></TouchableHighlight>
         </KeyboardAvoidingView>
         <View style={{marginTop:20}}>
         
@@ -135,45 +145,19 @@ var height = Dimensions.get('window').height;
 }
 
 
-const Stack = createStackNavigator();
+const MainApp = createSwitchNavigator(
+  {
 
-function MyStack() {
-  return (
-    <Stack.Navigator
-      initialRouteName="Home"
-      screenOptions={{
-        headerShown: false,
-        // headerTintColor: 'white',
-        // headerStyle: { backgroundColor: 'tomato' },
-      }}
-    >
-      <Stack.Screen
-        name="Login_Activity"
-        component={Login_Activity}
-        options={{
-          title: 'Awesome app',
-        }}
-      />
-      <Stack.Screen
-        name="BottomTabs"
-        component={BottomTabs}
-        options={{
-          title: 'My profile',
-        }}
-      />
-    
-    </Stack.Navigator>
-  );
-}
-
-export default function App() {
-  return (
-    <NavigationContainer>
-      <MyStack />
-    </NavigationContainer>
-  );
-}
-
+    Login_Activity: Login_Activity,
+    BottomTabs: BottomTabs,
+    Register_Activity:Register_Activity
+  
+  },
+  {
+    initialRouteName: 'Login_Activity',
+  }
+)
+export default createAppContainer(MainApp);
 const styles = StyleSheet.create({
 
   MainContainer: {

@@ -31,15 +31,15 @@ constructor (props) {
 
    
   componentDidMount() {
-       var c=0;
-  setInterval(() => {
-  this.viewPager.current.setPage(c);
-    c++
-  if(c===8){
-      c=0
-  }
+//        var c=0;
+//   setInterval(() => {
+//   this.viewPager.current.setPage(c);
+//     c++
+//   if(c===8){
+//       c=0
+//   }
 
-}, 5000);
+// }, 5000);
   }
  
     render() {

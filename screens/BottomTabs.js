@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, StatusBar } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons } from 'react-native-vector-icons';
@@ -85,6 +85,8 @@ function MyTabs() {
 export default function App() {
   return (
     <NavigationContainer>
+      <StatusBar  barStyle="dark-content"
+      /> 
       <MyTabs />
     </NavigationContainer>
   );
