@@ -10,10 +10,13 @@ export default class More extends React.Component  {
   constructor (props) {
     super(props)
     this.state = {
-        settingsModal: false, accountModal: false, planModal: false,pushNotif:true,emailNotif:true
+        settingsModal: false, accountModal: false, planModal: false,pushNotif:true,emailNotif:true,paymentModal:false
     };
 }
+  togglePayment = () => {
+    this.setState({ paymentModal: !this.state.paymentModal });
 
+  }
 togglePushNotif = () => {
    this.setState({ pushNotif: !this.state.pushNotif });
   
@@ -195,7 +198,7 @@ toggleEmailNotif = () => {
 <Text style={{fontSize:20,color:'white',textAlign:'center',margin:10}}>$ 0.0</Text>
 <Text style={{fontSize:20,color:'white',textAlign:'center',margin:10}}>/1</Text>
 </View>
-<Button title='Pay' color='black' />
+                <Button onPress={this.togglePayment} title='Pay' color='black' />
 </View>
 
 <View style={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',backgroundColor:'#444444',padding:10,marginBottom:20}}>
@@ -206,7 +209,7 @@ toggleEmailNotif = () => {
 <Text style={{fontSize:20,color:'white',textAlign:'center',margin:10}}>$ 7.99</Text>
 <Text style={{fontSize:20,color:'white',textAlign:'center',margin:10}}>/1</Text>
 </View>
-<Button title='Pay' color='black' />
+                <Button onPress={this.togglePayment} title='Pay' color='black' />
 </View>
 
 <View style={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',backgroundColor:'#444444',padding:10,marginBottom:20}}>
@@ -217,7 +220,7 @@ toggleEmailNotif = () => {
 <Text style={{fontSize:20,color:'white',textAlign:'center',margin:10}}>$ 99.0</Text>
 <Text style={{fontSize:20,color:'white',textAlign:'center',margin:10}}>/1</Text>
 </View>
-<Button title='Pay' color='black' />
+                <Button onPress={this.togglePayment} title='Pay' color='black' />
 </View>
 </ScrollView>
 
@@ -226,7 +229,25 @@ toggleEmailNotif = () => {
                  
                     </View>
                 </Modal>
+      <Modal onBackButtonPress={this.togglePayment} isVisible={this.state.paymentModal} style={{ flex: 1, margin: 0, padding: 0 }}>
+        <View style={{ flex: 1, margin: 0, padding: 0, backgroundColor: '#1A1A1A' }}>
+          <View style={{ display: 'flex', flexDirection: 'row', backgroundColor: '#121212' }}>
+            <TouchableOpacity onPress={this.togglePayment} style={{ width: 60, height: 60, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}><Ionicons name="md-arrow-back" color='white' size={28} /></TouchableOpacity><View style={{ height: 60, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}><Text style={{ color: 'white', fontSize: 22, margin: 10, }}>Payment</Text></View>
+          </View>
+          <View style={{ marginBottom: 60,padding:50 }}>
+            <TouchableOpacity style={{ width: '100%', backgroundColor: 'white', height: 100, borderRadius: 5,display:'flex',justifyContent:'center',alignItems:'center',overflow:'hidden' }}>
+              <Image source={require('../assets/safaricom.png')} style={{ height: '100%', width: '100%' }} />
 
+            </TouchableOpacity>
+            <TouchableOpacity style={{ width: '100%', backgroundColor: 'white',marginTop:50, height: 100, borderRadius: 5, display: 'flex', justifyContent: 'center', alignItems: 'center', overflow: 'hidden' }}>
+              <Image source={require('../assets/airtel.png')} style={{ height: '100%',width:'100%' }} />
+
+            </TouchableOpacity>
+          </View>
+
+
+        </View>
+      </Modal>
 
     </View>
   );}
